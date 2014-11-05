@@ -13,36 +13,68 @@
 //int _day;
 //std::string _week_day_name;
 //std::string _month_name;
+using namespace lab2;
 
-int days_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+int j_days_month[12];
+int jyear = 1858;
+int jmonth = 11;
+int jday = 5;
 
-Julian::Julian() : Date(1858, 11, 17){
+Julian::Julian() : Date(jyear, jmonth, jday){
+    init();
 }
 
 Julian::Julian(int y, int m, int d) : Date(y,m,d){
+    init();
+    if (m > months_per_year() || m < 1) {
+        throw std::out_of_range("Month out of range");
+    }
+    if (d > days_in_month(m, y) || d < 1) {
+        throw std::out_of_range("Day out of range");
+    }
 //    _year = y;
 //    _month = m;
 //    _day = d;
 }
 
-Julian::Julian(const Date & d) : Date(1858, 11, 17){
+Julian::Julian(const Date & d) : Date(jyear, jmonth, jday){
+    init();
     int j_day = d.mod_julian_day();
-//    _year = 1858;
-//    _month = 11;
-//    _day = 17;
+    change_date(j_day);
+}
+
+Julian::Julian(const Julian & j) : Date(jyear, jmonth, jday){
+    init();
+    int j_day = j.mod_julian_day();
     change_date(j_day);
 }
 
 Julian::~Julian() {
     
 }
+
+void Julian::init() {
+    int dm[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    std::copy(dm, dm+12, j_days_month);
+}
+
 Date & Julian::operator++() {
     change_date(1);
     return *this;
 }
+Julian Julian::operator++(int i) {
+    change_date(1);
+    Julian j(*this);
+    return j;
+}
 Date & Julian::operator--() {
     change_date(-1);
     return *this;
+}
+Julian Julian::operator--(int i) {
+    change_date(-1);
+    Julian j(*this);
+    return j;
 }
 Date & Julian::operator+=(const int & a) {
     change_date(a);
@@ -58,9 +90,9 @@ Date & Julian::operator=(const Date & date) {
         return *this;
     
     int j_day = date.mod_julian_day();
-    _year = 1858;
-    _month = 11;
-    _day = 17;
+    _year = jyear;
+    _month = jmonth;
+    _day = jday;
     change_date(j_day);
     return *this;
     
@@ -71,9 +103,9 @@ Date & Julian::operator=(Date && date) {
         return *this;
 
     int j_day = date.mod_julian_day();
-    _year = 1858;
-    _month = 11;
-    _day = 17;
+    _year = jyear;
+    _month = jmonth;
+    _day = jday;
     change_date(j_day);
     return *this;
 }
@@ -88,7 +120,7 @@ Date & Julian::add_year(int n) {
         
         for (int i = 0; i < n; i++) {
             if (_day == 29 && _month == 2) {
-                change_date(364);
+                change_date(365);
             } else {
                 _year++;
             }
@@ -101,7 +133,7 @@ Date & Julian::add_year(int n) {
         
         for (int i = 0; i < -n; i++) {
             if (_day == 29 && _month == 2) {
-                change_date(-366); // TODO kan vara fuck
+                change_date(-366);
             } else {
                 _year--;
             }
@@ -169,7 +201,7 @@ void Julian::change_date(const int & d) {
 }
 
 int Julian::week_day() const {
-    return mod_julian_day() % 7 + 3;
+    return mod_julian_day() % days_per_week() + 1;
 }
 int Julian::days_per_week() const {
     return 7;
@@ -186,8 +218,6 @@ bool Julian::leap_year(int & y) const {
 }
 
 int Julian::days_in_month(int m, int y) const {
-    if (m > 12)
-        throw std::out_of_range("Month out of range");
     if (m == 0) {
         m = 12;
         y--;
@@ -197,22 +227,22 @@ int Julian::days_in_month(int m, int y) const {
     }
     if (y % 4 == 0 && m == 2)
         return 29;
-    return days_month[m-1];
+    return j_days_month[m-1];
 }
 int Julian::months_per_year() const {
     return 12;
 }
 
 int Julian::mod_julian_day() const { // nice
-    int j_year = 1858;
-    int j_month = 11;
-    int j_day = 17;
-    
     int m = _month;
+    int y = _year;
     
     if (m == 1 || m == 2) {
         m += 12;
+        y--;
     }
     
-    return 365*(_year) + _year/4 + _day +  (153*m+8)/5 - (365*(j_year) + j_year/4 + j_day +  (153*j_month+8)/5);
+    int r_value = 365*(y) + y/4 + _day +  (153*m+8)/5 - (365*(jyear) + jyear/4 + jday +  (153*jmonth+8)/5);
+    
+    return r_value;
 }

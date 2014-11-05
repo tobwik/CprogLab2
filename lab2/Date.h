@@ -12,6 +12,7 @@
 #include <iostream>
 
 
+namespace lab2 {
 class Date {
     
 public:
@@ -19,6 +20,7 @@ public:
     //virtual ~Date() = 0;
     
     Date(int y, int m, int d);
+    Date(Date const& d);
     
     int year() const;
     int month() const;
@@ -68,7 +70,8 @@ protected:
     
     
 };
+}
 
-std::ostream & operator<<(std::ostream & os, const Date & d); // TODO maybe?
+std::ostream & operator<<(std::ostream & os, const lab2::Date & d); // TODO maybe?
 
 #endif /* defined(__lab2__Date__) */
