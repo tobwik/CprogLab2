@@ -24,6 +24,10 @@ namespace lab2 {
         
         struct Event {
             std::string name;
+            
+            Event() {
+                
+            }
 
             Event(std::string n) {
                 name = n;
@@ -64,10 +68,12 @@ namespace lab2 {
                     return true;
                 return false;
             }
+        
 
         };
         
         Calendar();
+//        Calendar(const Calendar & c);
         template <typename U> Calendar(const Calendar<U> & c);
 
         Calendar & operator=(Calendar &);
@@ -88,9 +94,9 @@ namespace lab2 {
         template <typename ST>
         friend std::ostream& operator<<(std::ostream & os, const Calendar<ST> & c); // TODO maybe?     
         
-    private:
         T cDate;
         std::set<std::pair<T, Event>> events;
+//    private:
         
     };
 
@@ -107,21 +113,37 @@ namespace lab2 {
     
     template <class T>
     Calendar<T>::Calendar() : cDate() {}
+    
+//    template <class T>
+//    Calendar<T>::Calendar(const Calendar & c) : cDate(c.cDate) {
+//        for (auto it = c.events.begin(); it != c.events.end(); ++it) {
+//            std::pair<T, Event> p;
+//            p.first = T(it->first);
+//            p.second.set_name(it->second.name);
+//            events.insert(p);
+//        }
+//    }
 
     template <class T>
     template <class U>
     Calendar<T>::Calendar(const Calendar<U> & c) : cDate(c.cDate) {
-        for (typename std::set<std::pair<U, Event>>::iterator it = c.events.begin(); it != c.events.end(); ++it) {
-            events.insert(std::pair<T, Event>(T(it->first), it->second));
+        for (auto it = c.events.begin(); it != c.events.end(); ++it) {
+            std::pair<T, Event> p;
+            p.first = T(it->first);
+            Event e(it->second.name);
+//            p.second(it->second.name);
+            p.second = e;
+            events.insert(p);
+//            events.insert(std::pair<T, Event>(T(it->first), it->second));
         }
     }
 
-    template <class T>
-    Calendar<T>::Calendar(const Calendar & c) : cDate(c.cDate) {
-        for (typename std::set<std::pair<T, Event>>::iterator it = c.events.begin(); it != c.events.end(); ++it) {
-            events.insert(std::pair<T, Event>(it->first, it->second));
-        }
-    }
+//    template <class T>
+//    Calendar<T>::Calendar(const Calendar & c) : cDate(c.cDate) {
+//        for (typename std::set<std::pair<T, Event>>::iterator it = c.events.begin(); it != c.events.end(); ++it) {
+//            events.insert(std::pair<T, Event>(it->first, it->second));
+//        }
+//    }
 
     // template <class T, class S>
     // Calendar<T>::Calendar(const Calendar<S> & c) : cDate(c.cDate){

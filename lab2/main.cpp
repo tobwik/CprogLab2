@@ -35,7 +35,7 @@ int main(int argc, const char * argv[])
    c.add_event("asdfqwer",3);
 
    Calendar<Julian> j(c);
-   // j = c;
+//    j = c;
    cout << j << endl;
 //    int foo = j.mod_julian_day();
 //    std::cout << foo << std::endl;
