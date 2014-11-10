@@ -5,9 +5,9 @@
  * solving it the wrong way.
  */
 
-#include "calendar.h"
-#include "julian.h"
-#include "gregorian.h"
+#include "Calendar.h"
+#include "Julian.h"
+#include "Gregorian.h"
 #include "kattistime.h"
 #include <vector>
 #include <string>
@@ -15,9 +15,6 @@
 #include <iostream>
 #include <cassert>
 #include <stdexcept>
-#include "gregorian.h"
-#include "julian.h"
-#include "calendar.h"
 
 using std::size_t;
 using std::cout;

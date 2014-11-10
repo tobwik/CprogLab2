@@ -24,7 +24,7 @@ Julian::Julian() : Date(jyear, jmonth, jday){
 
 void Julian::adjust() {
     time_t mytime;
-    time(&mytime);
+    k_time(&mytime);
 //    set_k_time(mytime);
     
     struct tm *t = gmtime(&mytime);

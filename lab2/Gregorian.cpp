@@ -19,10 +19,10 @@ int gday = 17;
 
 Gregorian::Gregorian() : Date(gyear, gmonth, gday){
     time_t mytime;
-    time(&mytime);
+    k_time(&mytime);
 //    set_k_time(mytime);
     
-    
+
     struct tm *t = gmtime(&mytime);
     int year  = t->tm_year + 1900;
     int month = t->tm_mon + 1;
