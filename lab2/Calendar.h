@@ -95,9 +95,14 @@ namespace lab2 {
         template <typename ST>
         friend std::ostream& operator<<(std::ostream & os, const Calendar<ST> & c); // TODO maybe?     
         
+    private:
         T cDate;
+<<<<<<< Updated upstream
         std::multimap<T, Event> events;
 //    private:
+=======
+        std::set<std::pair<T, Event>> events;
+>>>>>>> Stashed changes
         
     };
 
