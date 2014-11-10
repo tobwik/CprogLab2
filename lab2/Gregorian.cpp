@@ -7,6 +7,7 @@
 //
 
 #include "Gregorian.h"
+#include <time.h>
 #include "kattistime.h"
 
 using namespace lab2;
@@ -18,7 +19,7 @@ int gday = 17;
 
 Gregorian::Gregorian() : Date(gyear, gmonth, gday){
     time_t mytime;
-    time(&mytime);
+    k_time(&mytime);
 //    set_k_time(mytime);
     
     struct tm *t = gmtime(&mytime);
