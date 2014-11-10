@@ -28,54 +28,54 @@ namespace lab2 {
             Event() {
                 
             }
-
+            
             Event(std::string n) {
                 name = n;
             }
-
+            
             // bool operator==(const Event & event) const{
             //     if (name.compare(event.name) == 0)
             //         return true;
             //     return false;
             // }
-
+            
             // bool operator!=(const Event & event) const{
             //     if (name.compare(event.name) == 0)
             //         return false;
-            //     return true;   
+            //     return true;
             // }
-
+            
             // bool operator<(const Event & event) const{
             //     if (name < event.name)
             //         return true;
             //     return false;
             // }
-
+            
             // bool operator<=(const Event & event) const{
             //     if (name <= event.name)
             //         return true;
             //     return false;
             // }
-
+            
             // bool operator>(const Event & event) const{
             //     if (name > event.name)
             //         return true;
             //     return false;
             // }
-
+            
             // bool operator>=(const Event & event) const{
             //     if (name >= event.name)
             //         return true;
             //     return false;
             // }
-        
-
+            
+            
         };
         
         Calendar();
-//        Calendar(const Calendar & c);
+        //        Calendar(const Calendar & c);
         template <typename U> Calendar(const Calendar<U> & c);
-
+        
         // Calendar & operator=(Calendar &);
         template <typename U> Calendar & operator=(Calendar<U> &);
         
@@ -91,21 +91,16 @@ namespace lab2 {
         bool remove_event(std::string);
         bool remove_event(std::string, int);
         bool remove_event(std::string, int, int);
-
-        template <typename ST>
-        friend std::ostream& operator<<(std::ostream & os, const Calendar<ST> & c); // TODO maybe?     
         
-    private:
+        template <typename ST>
+        friend std::ostream& operator<<(std::ostream & os, const Calendar<ST> & c); // TODO maybe?
+        
         T cDate;
-<<<<<<< Updated upstream
         std::multimap<T, Event> events;
-//    private:
-=======
-        std::set<std::pair<T, Event>> events;
->>>>>>> Stashed changes
+        //    private:
         
     };
-
+    
     template <typename ST>
     std::ostream & operator<<(std::ostream & os, const Calendar<ST> & c) {
         for (auto it = c.events.begin(); it != c.events.end(); ++it) {
@@ -122,16 +117,16 @@ namespace lab2 {
     template <class T>
     Calendar<T>::Calendar() : cDate() {}
     
-//    template <class T>
-//    Calendar<T>::Calendar(const Calendar & c) : cDate(c.cDate) {
-//        for (auto it = c.events.begin(); it != c.events.end(); ++it) {
-//            std::pair<T, Event> p;
-//            p.first = T(it->first);
-//            p.second.set_name(it->second.name);
-//            events.insert(p);
-//        }
-//    }
-
+    //    template <class T>
+    //    Calendar<T>::Calendar(const Calendar & c) : cDate(c.cDate) {
+    //        for (auto it = c.events.begin(); it != c.events.end(); ++it) {
+    //            std::pair<T, Event> p;
+    //            p.first = T(it->first);
+    //            p.second.set_name(it->second.name);
+    //            events.insert(p);
+    //        }
+    //    }
+    
     template <class T>
     template <class U>
     Calendar<T>::Calendar(const Calendar<U> & c) : cDate(c.cDate) {
@@ -139,20 +134,20 @@ namespace lab2 {
             std::pair<T, Event> p;
             p.first = T(it->first);
             Event e(it->second.name);
-//            p.second(it->second.name);
+            //            p.second(it->second.name);
             p.second = e;
             events.insert(p);
-//            events.insert(std::pair<T, Event>(T(it->first), it->second));
+            //            events.insert(std::pair<T, Event>(T(it->first), it->second));
         }
     }
-
-//    template <class T>
-//    Calendar<T>::Calendar(const Calendar & c) : cDate(c.cDate) {
-//        for (typename std::set<std::pair<T, Event>>::iterator it = c.events.begin(); it != c.events.end(); ++it) {
-//            events.insert(std::pair<T, Event>(it->first, it->second));
-//        }
-//    }
-
+    
+    //    template <class T>
+    //    Calendar<T>::Calendar(const Calendar & c) : cDate(c.cDate) {
+    //        for (typename std::set<std::pair<T, Event>>::iterator it = c.events.begin(); it != c.events.end(); ++it) {
+    //            events.insert(std::pair<T, Event>(it->first, it->second));
+    //        }
+    //    }
+    
     // template <class T, class S>
     // Calendar<T>::Calendar(const Calendar<S> & c) : cDate(c.cDate){
     //     for (typename std::set<std::pair<T, Event>>::iterator it = c.events.begin(); it != c.events.end(); ++it) {
@@ -164,14 +159,14 @@ namespace lab2 {
     // Calendar<T> & Calendar<T>::operator=(Calendar & c) {
     //     cDate = c.cDate;
     //     events.clear();
-        
+    
     //     for (typename std::set<std::pair<T, Event>>::iterator it = c.events.begin(); it != c.events.end(); ++it) {
     //         events.insert(std::pair<T, Event>(it->first, it->second));
     //     }
-        
+    
     //     return *this;
     // }
-
+    
     template <class T>
     template <class U>
     Calendar<T> & Calendar<T>::operator=(Calendar<U> & c) {
@@ -182,7 +177,7 @@ namespace lab2 {
             std::pair<T, Event> p;
             p.first = T(it->first);
             Event e(it->second.name);
-//            p.second(it->second.name);
+            //            p.second(it->second.name);
             p.second = e;
             events.insert(p);
             // events.insert(std::pair<T, Event>(it->first, it->second));
@@ -204,17 +199,17 @@ namespace lab2 {
         } catch (std::out_of_range) { return false; }
         return true;
     }
-
+    
     template <class T>
     bool Calendar<T>::add_event(std::string name) {
         return add_event(name, cDate.day());
     }
-
+    
     template <class T>
     bool Calendar<T>::add_event(std::string name, int day) {
         return add_event(name, day, cDate.month());
     }
-
+    
     template <class T>
     bool Calendar<T>::add_event(std::string name, int day, int month) {
         return add_event(name, day, month, cDate.year());
@@ -224,8 +219,8 @@ namespace lab2 {
     bool Calendar<T>::add_event(std::string name, int day, int month, int year) {
         try {
             T date(year, month, day);
-            Event e(name); 
-
+            Event e(name);
+            
             // Check if event is already existing
             for (auto it = events.begin(); it != events.end(); ++it) {
                 if (it->first == date && it->second.name == e.name) return false;
@@ -237,17 +232,17 @@ namespace lab2 {
             return false;
         }
     }
-
+    
     template <class T>
     bool Calendar<T>::remove_event(std::string name) {
         return remove_event(name, cDate.day());
     }
-
+    
     template <class T>
     bool Calendar<T>::remove_event(std::string name, int day) {
         return remove_event(name, day, cDate.month());
     }
-
+    
     template <class T>
     bool Calendar<T>::remove_event(std::string name, int day, int month) {
         return remove_event(name, day, month, cDate.year());
@@ -271,6 +266,6 @@ namespace lab2 {
         }
         return false;
     }
-
+    
 }
 #endif /* defined(__lab2__Calendar__) */
