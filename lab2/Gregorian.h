@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "Date.h"
+#include <stdexcept>
 
 //using namespace lab2;
 
@@ -28,6 +29,7 @@ namespace lab2 {
         
         void change_date(const int & d);
         void init();
+        bool leap_year(int & y) const;
         
     public:
         
@@ -46,13 +48,13 @@ namespace lab2 {
         Date & operator-=(const int & a);
         
         Date & operator=(const Date & d);
+        Date & operator=(const Gregorian & g);
         Date & operator=(Date && d);
         
         Date & add_month(int n = 1);
         Date & add_year(int n = 1);
         
         
-        bool leap_year(int & y) const;
         
         int mod_julian_day() const;
         
@@ -61,6 +63,9 @@ namespace lab2 {
         int days_this_month() const;
         int months_per_year() const;
         int days_in_month(int m, int y) const;
+        
+        std::string week_day_name() const;
+        std::string month_name() const;
         
     };
 }

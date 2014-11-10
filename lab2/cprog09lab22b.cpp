@@ -1,13 +1,13 @@
 /*
- * Driver for cprog06lab22a. Written 2006-10-03 by Gunnar Kreitz <gkreitz>
+ * Driver for cprog06lab22b. Written 2006-10-03 by Gunnar Kreitz <gkreitz>
  *
  * If you need to modify this file to solve the assignment, you're most likely
  * solving it the wrong way.
  */
 
-#include "Julian.h"
+#include "Gregorian.h"
 #include "kattistime.h"
-#include "Date.h"
+#include "Gregorian.h"
 #include <vector>
 #include <string>
 #include <cstdio>
@@ -19,7 +19,7 @@ using std::size_t;
 using std::cout;
 using std::endl;
 
-using lab2::Julian;
+using lab2::Gregorian;
 using lab2::Date;
 
 static int linenr = 0;
@@ -82,10 +82,10 @@ int main(int argc, char **argv) {
         linenr++;
 		std::string command(buf);
 
-		if(command == "julian") {
-			new_date<Julian>();
-		} else if(command == "juliancopy") {
-			new_date_copy<Julian>();
+		if(command == "gregorian") {
+			new_date<Gregorian>();
+		} else if(command == "gregoriancopy") {
+			new_date_copy<Gregorian>();
 		} else if(command == "copy") {
 			const size_t from = read_idx_or_die();
 			const size_t to = read_idx_or_die();
@@ -104,31 +104,31 @@ int main(int argc, char **argv) {
 			cout << "L" << linenr << ":D" << idx << ";" << *const_cast<const Date*>(dates[idx]) << endl;
 		} else if(command == "year") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->year() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->year() << endl;
 		} else if(command == "month") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->month() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->month() << endl;
 		} else if(command == "day") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->day() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->day() << endl;
 		} else if(command == "week_day") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->week_day() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->week_day() << endl;
 		} else if(command == "days_per_week") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->days_per_week() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->days_per_week() << endl;
 		} else if(command == "days_this_month") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->days_this_month() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->days_this_month() << endl;
 		} else if(command == "months_per_year") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->months_per_year() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->months_per_year() << endl;
 		} else if(command == "week_day_name") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->week_day_name() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->week_day_name() << endl;
 		} else if(command == "month_name") {
 			const size_t idx = read_idx_or_die();
-			cout << "L" << linenr<< ":D" << idx << ";" << const_cast<const Date*>(dates[idx])->month_name() << endl;
+			cout << "L" << linenr << ":D" << idx << ";" <<const_cast<const Date*>(dates[idx])->month_name() << endl;
 		} else if(command == "d++") {
 			const size_t idx = read_idx_or_die();
 			try {
@@ -208,34 +208,34 @@ int main(int argc, char **argv) {
 		} else if(command == "d==") {
 			const size_t lhs = read_idx_or_die();
 			const size_t rhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" << ((*const_cast<const Date*>(dates[lhs])) == (*const_cast<const Date*>(dates[rhs]))) << endl;
+			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" <<((*const_cast<const Date*>(dates[lhs])) == (*const_cast<const Date*>(dates[rhs]))) << endl;
 		} else if(command == "d!=") {
 			const size_t lhs = read_idx_or_die();
 			const size_t rhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" << ((*const_cast<const Date*>(dates[lhs])) != (*const_cast<const Date*>(dates[rhs]))) << endl;
+			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" <<((*const_cast<const Date*>(dates[lhs])) != (*const_cast<const Date*>(dates[rhs]))) << endl;
 		} else if(command == "d<") {
 			const size_t lhs = read_idx_or_die();
 			const size_t rhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" << ((*const_cast<const Date*>(dates[lhs])) < (*const_cast<const Date*>(dates[rhs]))) << endl;
+			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" <<((*const_cast<const Date*>(dates[lhs])) < (*const_cast<const Date*>(dates[rhs]))) << endl;
 		} else if(command == "d<=") {
 			const size_t lhs = read_idx_or_die();
 			const size_t rhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" << ((*const_cast<const Date*>(dates[lhs])) <= (*const_cast<const Date*>(dates[rhs]))) << endl;
+			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" <<((*const_cast<const Date*>(dates[lhs])) <= (*const_cast<const Date*>(dates[rhs]))) << endl;
 		} else if(command == "d>") {
 			const size_t lhs = read_idx_or_die();
 			const size_t rhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" << ((*const_cast<const Date*>(dates[lhs])) > (*const_cast<const Date*>(dates[rhs]))) << endl;
+			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" <<((*const_cast<const Date*>(dates[lhs])) > (*const_cast<const Date*>(dates[rhs]))) << endl;
 		} else if(command == "d>=") {
 			const size_t lhs = read_idx_or_die();
 			const size_t rhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" << ((*const_cast<const Date*>(dates[lhs])) >= (*const_cast<const Date*>(dates[rhs]))) << endl;
+			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" <<((*const_cast<const Date*>(dates[lhs])) >= (*const_cast<const Date*>(dates[rhs]))) << endl;
 		} else if(command == "d-") {
 			const size_t lhs = read_idx_or_die();
 			const size_t rhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" << ((*const_cast<const Date*>(dates[lhs])) - (*const_cast<const Date*>(dates[rhs]))) << endl;
+			cout << "L" << linenr << ":D" << lhs << ",D" << rhs << ";" <<((*const_cast<const Date*>(dates[lhs])) - (*const_cast<const Date*>(dates[rhs]))) << endl;
 		} else if(command == "mod_julian_day") {
 			const size_t lhs = read_idx_or_die();
-			cout << "L" << linenr << ":D" << lhs << ";" << const_cast<const Date*>(dates[lhs])->mod_julian_day() << endl;
+			cout << "L" << linenr << ":D" << lhs << ";" <<const_cast<const Date*>(dates[lhs])->mod_julian_day() << endl;
 		} else if(command == "set_k_time") {
 			time_t time = 0;
 			/* No standardized way to read time_t with scanf */
