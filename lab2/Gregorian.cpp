@@ -22,6 +22,7 @@ Gregorian::Gregorian() : Date(gyear, gmonth, gday){
     time(&mytime);
 //    set_k_time(mytime);
     
+    
     struct tm *t = gmtime(&mytime);
     int year  = t->tm_year + 1900;
     int month = t->tm_mon + 1;
